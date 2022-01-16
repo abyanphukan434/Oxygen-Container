@@ -1,0 +1,107 @@
+<html>
+    <head>
+        <title>Breathe Oxygen</title>
+    </head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            position: relative;
+            font-family: cursive;
+        }
+        
+        .flex {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        body {
+            width: 100vw;
+            height: 100vh;
+            background: black;
+            overflow: hidden;
+        }
+        
+        body > p{
+            font-size: 4em;
+            color: #5c5c5c;
+            transform: scale(1.2);
+            top: 200px;
+        }
+        
+        .container {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 2px solid #0099ff;
+            position: absolute;
+            text-align: center;
+            color: #0099ff;
+        }
+        
+        .container p {
+            font-size: .9em;
+        }
+        
+        .container p span {
+            font-size: 2em;
+        }
+        
+        .o2 {
+            color: #0099ff;
+            font-size: 5em;
+            position: absolute;
+            transition: 0.5s;
+        }
+        
+        .o2 sub {
+            font-size: .4em;
+            top: -10px;
+        }
+    </style>
+    <body class = "flex">
+        <p>Breathe Oxygen</p>
+        <div class = "container">
+            <p>Oxygen<br><span>Container</span></p>
+        </div>
+        
+        <script>
+            var body = document.body;
+            
+            body.onmousemove = (e) => {
+                    makeO2(e);
+            }
+            
+            function makeO2(e) {
+                var x = e.clientX;
+                var y = e.clientY;
+                var sc = Math.random();
+                
+                var element = document.createElement('div');
+                element.setAttribute('class', 'o2');
+                element.setAttribute('style', `left: ${x}px; top: ${y}px; transform: scale(0);`);
+                element.innerHTML = 'O<sub>2</sub>';
+                
+                setTimeout(() => {
+                    element.style.transition = 'all .5s';
+                    element.style.transform = `scale(${sc})`;
+                }, 10);
+                
+                  setTimeout(() => {
+                    element.style.transition = 'all 2s';
+                    element.style.transform = `scale(0)`;
+                    element.style.left = window.innerWidth / 2 + 'px';
+                    element.style.top = window.innerHeight / 2 + 'px';
+                }, 500);
+                
+                  setTimeout(() => {
+                    element.remove();
+                }, 3500);
+                
+                body.insertAdjacentElement("afterbegin", element);
+            }
+        </script>
+    </body>
+</html>
